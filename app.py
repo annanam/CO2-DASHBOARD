@@ -60,12 +60,10 @@ app.layout = html.Div([
     )
 ])
 
-server = app.server  # Required for Render
-
-# Ensure Gunicorn can find the app
-application = app  # Change this line!
+server = app.server  # This tells Render what to run
+application = app  # Gunicorn expects 'application', not 'app'
 
 if __name__ == "__main__":
-    app.run_server(debug=True, host="0.0.0.0", port=8080)
+    app.run_server(debug=True, host="0.0.0.0", port=10000)  # Use a fixed port
 
 
