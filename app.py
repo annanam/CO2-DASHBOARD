@@ -18,12 +18,12 @@ top_co2_emitters = (
 
 # Initialize Dash app
 app = Dash(__name__)
+server = app.server  # Fix for Render deployment
 
 # Define app layout
 app.layout = html.Div([
     html.H1("Global CO₂ Emissions and GDP Dashboard", style={'textAlign': 'center', 'fontFamily': 'Arial'}),
 
-    # Scatter Plot: CO2 Emissions vs GDP
     dcc.Graph(
         id='co2-vs-gdp',
         figure=px.scatter(
@@ -36,7 +36,6 @@ app.layout = html.Div([
         )
     ),
 
-    # Line Chart: CO₂ Emissions Over Time
     dcc.Graph(
         id='co2-trends',
         figure=px.line(
@@ -48,7 +47,6 @@ app.layout = html.Div([
         )
     ),
 
-    # Bar Chart: Top 10 CO₂ Emitting Countries
     dcc.Graph(
         id='top-co2-emitters',
         figure=px.bar(
@@ -60,10 +58,5 @@ app.layout = html.Div([
     )
 ])
 
-server = app.server  # This tells Render what to run
-application = app  # Gunicorn expects 'application', not 'app'
-
 if __name__ == "__main__":
-    app.run_server(debug=True, host="0.0.0.0", port=10000)  # Use a fixed port
-
-
+    app.run_server(debug=True, host="0.0.0.0", port=8080)
