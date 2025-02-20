@@ -60,7 +60,9 @@ app.layout = html.Div([
     )
 ])
 
-server = app.server  # This tells Gunicorn what to run
+server = app.server  # Required for Render
 
-if __name__ == "__main__":
-    app.run_server(debug=True)
+# Gunicorn needs this exact line
+if __name__ != "__main__":
+    application = app
+
