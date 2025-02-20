@@ -1,2 +1,2 @@
-#!/bin/bash
-gunicorn app:application --bind 0.0.0.0:10000
+#!/bin/sh
+gunicorn app:server --bind 0.0.0.0:8080
